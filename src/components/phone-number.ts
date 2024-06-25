@@ -2,19 +2,22 @@ import { Render } from "./shared-types";
 
 export interface PhoneProps {
   number: string;
-  label: string;
+  label?: string;
 }
 
 const phoneRender: Render<PhoneProps> = (props) => {
   const cleaned = props.number.replace(/(-|\(|\))/g, "");
-  var match = cleaned.match(/^(\\d{3})(\\d{3})(\\d{4})$/);
-  console.log({ cleaned, match });
+  const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+  let formattedNumber: string = props.number;
 
   if (match) {
-    return "(" + match[1] + ") " + match[2] + "-" + match[3];
+    formattedNumber = `(${match[1]}) ${match[2]}-${match[3]}`;
   }
 
-  return `<a href="tel:${props.number}">${props.label}</a>`;
+  return `<a href="tel:${formattedNumber}">${
+    props.label ?? formattedNumber
+  }</a>`;
 };
 
 export default phoneRender;
