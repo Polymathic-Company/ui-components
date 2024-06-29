@@ -1,11 +1,11 @@
 import { Render } from "./shared-types";
 
 export interface RichTextProps {
-  text: string;
+  value: string;
 }
 
 const richTextRender: Render<RichTextProps> = (props) => {
-  return `<p>${props.text}</p>`;
+  return `<p>${props.value}</p>`;
 };
 
 export default richTextRender;
